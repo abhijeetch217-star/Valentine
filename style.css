@@ -2,46 +2,43 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family:'Segoe UI',sans-serif;
 }
 
 body{
   overflow:hidden;
   height:100vh;
-  background: linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fa3,#ff4d6d);
+  background:linear-gradient(-45deg,#ff4d6d,#ff758f,#ff8fa3,#ff4d6d);
   background-size:400% 400%;
-  animation:gradientMove 8s ease infinite;
+  animation:bgMove 8s ease infinite;
   color:white;
 }
 
-@keyframes gradientMove{
+@keyframes bgMove{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
 
+/* SLIDER CONTAINER */
 .container{
-  width:100%;
+  display:flex;
+  width:600vw;
   height:100vh;
-  position:relative;
+  transition:transform 0.6s ease-in-out;
 }
 
+/* EACH PAGE */
 .page{
-  position:absolute;
-  width:100%;
-  height:100%;
-  padding:20px;
+  width:100vw;
+  height:100vh;
+  flex-shrink:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  transform:translateX(100%);
-  transition:0.6s ease;
-}
-
-.page.active{
-  transform:translateX(0);
+  padding:20px;
 }
 
 h1{
@@ -51,8 +48,7 @@ h1{
 
 p{
   font-size:4vw;
-  line-height:1.5;
-  margin:15px 0;
+  line-height:1.6;
   max-width:90%;
 }
 
@@ -63,17 +59,17 @@ p{
   border-radius:15px;
 }
 
-/* Glow animation */
+/* Glow */
 .glow{
   animation:glow 1.5s infinite alternate;
 }
 
 @keyframes glow{
-  from{ text-shadow:0 0 10px #fff; }
-  to{ text-shadow:0 0 25px #fff; }
+  from{text-shadow:0 0 10px #fff;}
+  to{text-shadow:0 0 25px #fff;}
 }
 
-/* BUTTON STYLE */
+/* BUTTON */
 button{
   padding:12px 28px;
   border:none;
@@ -114,13 +110,14 @@ button:hover{
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.85);
   display:flex;
   justify-content:center;
   align-items:center;
   opacity:0;
   pointer-events:none;
   transition:0.4s;
+  z-index:999;
 }
 
 #popup.show{
@@ -134,12 +131,14 @@ button:hover{
   padding:30px;
   border-radius:20px;
   text-align:center;
-  animation:pop 0.5s ease;
+  width:80%;
+  max-width:320px;
+  animation:pop 0.4s ease;
 }
 
 @keyframes pop{
-  from{ transform:scale(0.6); opacity:0;}
-  to{ transform:scale(1); opacity:1;}
+  from{transform:scale(0.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
 
 /* Flower rain */
@@ -148,11 +147,12 @@ button:hover{
   top:-20px;
   font-size:22px;
   animation:fall linear forwards;
+  z-index:1000;
 }
 
 @keyframes fall{
   to{
-    transform:translateY(100vh) rotate(720deg);
+    transform:translateY(110vh) rotate(720deg);
     opacity:0.9;
   }
 }
@@ -164,6 +164,7 @@ button:hover{
   height:6px;
   border-radius:50%;
   animation:explode 1s ease-out forwards;
+  z-index:1000;
 }
 
 @keyframes explode{
@@ -173,7 +174,7 @@ button:hover{
   }
 }
 
-/* Responsive Fix */
+/* Responsive */
 @media(max-width:600px){
   h1{font-size:7vw;}
   p{font-size:4.5vw;}
