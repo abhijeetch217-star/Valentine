@@ -1,16 +1,18 @@
-const pages = document.querySelectorAll(".page");
+const container = document.querySelector(".container");
 const nextBtns = document.querySelectorAll(".next");
 const foreverBtn = document.getElementById("foreverBtn");
 const popup = document.getElementById("popup");
 
 let current = 0;
+const totalPages = document.querySelectorAll(".page").length;
 
 /* PAGE SLIDE */
 nextBtns.forEach(btn=>{
   btn.addEventListener("click",()=>{
-    pages[current].classList.remove("active");
-    current++;
-    pages[current].classList.add("active");
+    if(current < totalPages - 1){
+      current++;
+      container.style.transform = `translateX(-${current * 100}vw)`;
+    }
   });
 });
 
@@ -19,7 +21,7 @@ const allButtons = document.querySelectorAll("button");
 
 allButtons.forEach(btn=>{
   btn.addEventListener("mouseenter",()=>{
-    for(let i=0;i<10;i++){
+    for(let i=0;i<8;i++){
       const heart=document.createElement("div");
       heart.classList.add("heart");
       heart.innerHTML="💖";
@@ -33,35 +35,37 @@ allButtons.forEach(btn=>{
   });
 });
 
-/* FINAL CLICK EFFECT */
-foreverBtn.addEventListener("click",()=>{
+/* FINAL BUTTON CLICK */
+if(foreverBtn){
+  foreverBtn.addEventListener("click",()=>{
 
-  popup.classList.add("show");
+    popup.classList.add("show");
 
-  /* Flower Rain */
-  for(let i=0;i<60;i++){
-    const petal=document.createElement("div");
-    petal.classList.add("petal");
-    petal.innerHTML="🌹";
-    petal.style.left=Math.random()*window.innerWidth+"px";
-    petal.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(petal);
-    setTimeout(()=>petal.remove(),6000);
-  }
+    /* Flower Rain */
+    for(let i=0;i<50;i++){
+      const petal=document.createElement("div");
+      petal.classList.add("petal");
+      petal.innerHTML="🌹";
+      petal.style.left=Math.random()*window.innerWidth+"px";
+      petal.style.animationDuration=(Math.random()*3+3)+"s";
+      document.body.appendChild(petal);
+      setTimeout(()=>petal.remove(),6000);
+    }
 
-  /* Fireworks */
-  for(let i=0;i<7;i++){
-    setTimeout(createFirework,i*300);
-  }
+    /* Fireworks */
+    for(let i=0;i<6;i++){
+      setTimeout(createFirework,i*300);
+    }
 
-});
+  });
+}
 
 /* Firework Function */
 function createFirework(){
   const x=Math.random()*window.innerWidth;
   const y=Math.random()*window.innerHeight/2;
 
-  for(let i=0;i<35;i++){
+  for(let i=0;i<30;i++){
     const fw=document.createElement("div");
     fw.classList.add("firework");
     fw.style.left=x+"px";
